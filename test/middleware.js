@@ -173,5 +173,77 @@ describe('Middlewares', () => {
 			assert.strictEqual(response.headers['cache-control'], 'private');
 		});
 	});
+
+	describe('Render Method Middleware', () => {
+		let reqMock;
+		let resMock;
+	
+		beforeEach(() => {
+			reqMock = {
+				uid: 1,
+				baseUrl: '',
+				path: '',
+				loggedIn: true,
+				route: {
+					path: '/',
+				},
+				app: {
+					set: () => {},
+				},
+				query: {},
+			};
+	
+			resMock = {
+				locals: {},
+				headersSent: false,
+				set: () => {},
+				render: function (template, options, callback) {
+					callback(null, '<html></html>');
+				},
+				json: () => {},
+				send: () => {},
+			};
+		});
+	
+		it('should not proceed if headers are already sent', async () => {
+			const middleware = require('../src/middleware');
+	
+			// Simulate headers already being sent
+			resMock.headersSent = true;
+	
+			let nextCalled = false;
+			const next = () => {
+				nextCalled = true;
+			};
+	
+			// Use the middleware with the render override
+			middleware.processRender(reqMock, resMock, next);
+	
+			await resMock.render('template', {});
+	
+			// Check that the next middleware function is not called
+			assert.strictEqual(nextCalled, false);
+		});
+	
+		it('should call next if headers are not sent', async () => {
+			const middleware = require('../src/middleware');
+	
+			let nextCalled = false;
+			const next = () => {
+				nextCalled = true;
+			};
+	
+			// Use the middleware with the render override
+			middleware.processRender(reqMock, resMock, next);
+	
+			await resMock.render('template', {});
+	
+			// Check that the next middleware function is called
+			assert.strictEqual(nextCalled, true);
+		});
+	
+		// Add additional test cases as needed...
+	});
+	
 });
 
