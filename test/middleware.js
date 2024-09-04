@@ -174,16 +174,21 @@ describe('Middlewares', () => {
 		});
 	});
 
+	//New Test Case Added by Vicky
 	describe('Render Method Middleware', () => {
 		let reqMock;
 		let resMock;
-	
+		
+		//setting a mock versions of the req(request) and res (response) objects to simulate typical HTTP 
+			//response and request without running an actual server
 		beforeEach(() => {
+			//reqMock is simulating request objects of properties of the users
 			reqMock = {
 				uid: 1,
 				baseUrl: '',
 				path: '',
 				loggedIn: true,
+				//representing the request route and app configuration
 				route: {
 					path: '/',
 				},
@@ -192,19 +197,25 @@ describe('Middlewares', () => {
 				},
 				query: {},
 			};
-	
+			
+			//resMock represents a response object
 			resMock = {
 				locals: {},
+				//set to false to show that the headers haven't been sent
 				headersSent: false,
 				set: () => {},
+				//mock function that simulates the behavior of rendering a template
 				render: function (template, options, callback) {
 					callback(null, '<html></html>');
 				},
+				//mocked methods that simulates sending a response
 				json: () => {},
 				send: () => {},
 			};
 		});
-	
+		
+		//this test case checks if the middleware correctly stops processing when headers were already sent
+			//by setting headersSent = true
 		it('should not proceed if headers are already sent', async () => {
 			const middleware = require('../src/middleware');
 	
@@ -216,15 +227,18 @@ describe('Middlewares', () => {
 				nextCalled = true;
 			};
 	
-			// Use the middleware with the render override
+			// calling the middleware main function with the Mock objects above
 			middleware.processRender(reqMock, resMock, next);
-	
+			
+			//called to trigger the rendering process ith a dumy template
 			await resMock.render('template', {});
 	
-			// Check that the next middleware function is not called
+			// Check that the next middleware function is not called since headers have already been sent
 			assert.strictEqual(nextCalled, false);
 		});
-	
+		
+		//this test case checks if the middleware correctly proceeds when the headers have not been sent
+			//(headersSent = false as default from the beforeEach)
 		it('should call next if headers are not sent', async () => {
 			const middleware = require('../src/middleware');
 	
@@ -233,16 +247,16 @@ describe('Middlewares', () => {
 				nextCalled = true;
 			};
 	
-			// Use the middleware with the render override
+			//calling the middleware main function with the Mock objects above
 			middleware.processRender(reqMock, resMock, next);
-	
+			
+			//called to trigger the rendering process with a dummy template
 			await resMock.render('template', {});
 	
-			// Check that the next middleware function is called
+			// Checks that the next middleware function is called since the headers has not been sent
 			assert.strictEqual(nextCalled, true);
 		});
 	
-		// Add additional test cases as needed...
 	});
 	
 });
