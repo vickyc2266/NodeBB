@@ -57,7 +57,7 @@ module.exports = function (middleware) {
 					res: res,
 					templateData: options,
 				});
-				// console.log("VICKY_CHEN");
+				console.log("VICKY_CHEN");
 				if (checkHeadersSent(res)) return;
 				const templateToRender = buildResult.templateData.templateToRender || template;
 
@@ -67,7 +67,7 @@ module.exports = function (middleware) {
 					templateData: buildResult.templateData,
 				});
 				if (checkHeadersSent(res)) return;
-				// console.log("VICKY_CHEN");
+				console.log("VICKY_CHEN");
 				options = renderResult.templateData;
 				options._header = {
 					tags: await meta.tags.parse(req, renderResult, res.locals.metaTags, res.locals.linkTags),
