@@ -123,7 +123,7 @@ module.exports = function (middleware) {
 		next();
 	};
 
-	/*1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE----------------------------*/
+	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
 	function checkHeadersSent(res) {
 		if (res.headersSent) {
 			return true;
@@ -131,7 +131,7 @@ module.exports = function (middleware) {
 		return false;
 	}
 
-	/*1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE----------------------------*/
+	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
 
 	async function getLoggedInUser(req) {
 		if (req.user) {
