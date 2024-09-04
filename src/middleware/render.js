@@ -130,9 +130,9 @@ module.exports = function (middleware) {
 	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
 	function checkHeadersSent(res) {
 		if (res.headersSent) {
-			return true;
+			return;
 		}
-		return false;
+		
 	}
 
 	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
