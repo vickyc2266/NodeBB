@@ -57,9 +57,6 @@ module.exports = function (middleware) {
 					res: res,
 					templateData: options,
 				});
-				// if (res.headersSent) {
-				// 	return;
-				// }
 				// console.log("VICKY_CHEN");
 				if (checkHeadersSent(res)) return;
 				const templateToRender = buildResult.templateData.templateToRender || template;
@@ -69,9 +66,6 @@ module.exports = function (middleware) {
 					res: res,
 					templateData: buildResult.templateData,
 				});
-				// if (res.headersSent) {
-				// 	return;
-				// }
 				if (checkHeadersSent(res)) return;
 				// console.log("VICKY_CHEN");
 				options = renderResult.templateData;

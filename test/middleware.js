@@ -174,7 +174,7 @@ describe('Middlewares', () => {
 		});
 	});
 
-	//New Test Case Added by Vicky
+	/* New Test Case Added by Vicky */
 	describe('Render Method Middleware', () => {
 		let reqMock;
 		let resMock;
