@@ -210,7 +210,7 @@ describe('Middlewares', () => {
 				json: () => {},
 				send: () => {},
 			};
-		});	
+		});
 		/* this test case checks if the middleware correctly stops processing when headers were already sent */
 		/* by setting headersSent = true */
 		it('should not proceed if headers are already sent', async () => {
