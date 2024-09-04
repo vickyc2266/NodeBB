@@ -58,7 +58,9 @@ module.exports = function (middleware) {
 					templateData: options,
 				});
 				console.log('VICKY_CHEN');
-				if (checkHeadersSent(res)) return;
+				if (checkHeadersSent(res)) {
+					return;
+				}
 				const templateToRender = buildResult.templateData.templateToRender || template;
 
 				const renderResult = await plugins.hooks.fire('filter:middleware.render', {
@@ -66,7 +68,9 @@ module.exports = function (middleware) {
 					res: res,
 					templateData: buildResult.templateData,
 				});
-				if (checkHeadersSent(res)) return;
+				if (checkHeadersSent(res)) {
+					return;
+				}
 				console.log('VICKY_CHEN');
 				options = renderResult.templateData;
 				options._header = {
