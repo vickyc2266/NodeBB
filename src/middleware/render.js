@@ -58,9 +58,7 @@ module.exports = function (middleware) {
 					templateData: options,
 				});
 				console.log('VICKY_CHEN');
-				if (checkHeadersSent(res)) {
-					return;
-				}
+				checkHeadersSent(res);
 				const templateToRender = buildResult.templateData.templateToRender || template;
 
 				const renderResult = await plugins.hooks.fire('filter:middleware.render', {
@@ -68,9 +66,7 @@ module.exports = function (middleware) {
 					res: res,
 					templateData: buildResult.templateData,
 				});
-				if (checkHeadersSent(res)) {
-					return;
-				}
+				checkHeadersSent(res);
 				console.log('VICKY_CHEN');
 				options = renderResult.templateData;
 				options._header = {
@@ -132,7 +128,6 @@ module.exports = function (middleware) {
 		if (res.headersSent) {
 			return;
 		}
-		
 	}
 
 	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
