@@ -31,18 +31,6 @@ module.exports = function (middleware) {
 		// res.render post-processing, modified from here: https://gist.github.com/mrlannigan/5051687
 		const { render } = res;
 
-	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
-	function checkHeadersSent(res) {
-		if (res.headersSent) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
-
 		res.render = async function renderOverride(template, options, fn) {
 			const self = this;
 			const { req } = this;
@@ -134,6 +122,18 @@ module.exports = function (middleware) {
 
 		next();
 	};
+
+	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
+	function checkHeadersSent(res) {
+		if (res.headersSent){
+			return; 
+		}
+		else {
+			return;
+		}
+	}
+
+	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
 
 	async function getLoggedInUser(req) {
 		if (req.user) {
