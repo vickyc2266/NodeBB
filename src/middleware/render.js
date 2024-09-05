@@ -32,11 +32,13 @@ module.exports = function (middleware) {
 		const { render } = res;
 
 	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
-	function checkAndHandleHeadersSent(res) {
+	function checkHeadersSent(res) {
 		if (res.headersSent) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	/* 1----------------------------NEW FUNCTION checkHeadersSent BUILT HERE---------------------------- */
