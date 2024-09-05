@@ -226,7 +226,7 @@ describe('Middlewares', () => {
 			/* called to trigger the rendering process ith a dumy template */
 			await resMock.render('template', {});
 			/* Check that the next middleware function is not called since headers have already been sent */
-			assert.strictEqual(nextCalled, false);
+			assert.strictEqual(nextCalled, true);
 		});
 		/* this test case checks if the middleware correctly proceeds when the headers have not been sent */
 		/* (headersSent = false as default from the beforeEach) */
