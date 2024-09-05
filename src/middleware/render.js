@@ -129,7 +129,7 @@ module.exports = function (middleware) {
 			return true;
 		}
 		else {
-			return;
+			return false;
 		}
 	}
 
